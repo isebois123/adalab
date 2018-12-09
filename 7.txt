@@ -1,0 +1,55 @@
+import java.util.*;
+public class dk 
+{
+final static int max=20;
+final static int infinity=999;
+static Scanner scan=new Scanner(System.in);
+static int n,cost[][],dest[],source;
+public static void main(String args[])
+{
+	int i,j,sum;
+	System.out.println("enter number of nodes");
+	n=scan.nextInt();
+	cost=new int [max][max];
+	System.out.println("\n enter cost matrix \n enter 999 for no edges\n");
+	for(i=1;i<=n;i++)
+		for(j=i;j<=n;j++)
+			cost[i][j]=scan.nextInt();
+	System.out.println("enter source nodes");
+	source=scan.nextInt();
+	dijkstra();
+	//dijkstra(cost,n,source,dest);
+	for(i=1;i<=n;i++)
+		System.out.println("\n shortest dist from source "+source+"to"+i+"is"+dest[i]+"\n");
+}//
+//void dijkstra(int cost[10][10],int n,int source,int dest[10])
+static void dijkstra()
+{
+int visited[]=new int [10];
+dest=new int[max];
+int u=0,i,j,min;
+for(i=1;i<=n;i++)
+{
+   dest[i]=cost[source][i];
+   visited[i]=0;
+}
+visited[source]=1;
+for(i=0;i<n;i++)
+ {
+	min=infinity;
+	for(j=1;j<=n;j++)
+	if(visited[j]==0&&dest[j]<min)
+		{
+			min=dest[j];
+			u=j;
+		}
+		visited[u]=1;
+		for(j=1;j<=n;j++)
+			if(visited[j]==0&&(dest[u]+cost[u][j])<dest[j])
+			{
+				dest[j]=dest[u]+cost[u][j];
+				
+			}
+	}
+}//
+}//

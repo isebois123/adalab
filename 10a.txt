@@ -1,0 +1,54 @@
+import java.util.Scanner;
+public class floydsclass 
+{
+ static final int max=20;
+ static int a[][];
+ static int n;
+  public static void main(String args[])
+  {
+		 a=new int [max][max];
+		 readMatrix();
+		 floyds();
+		 printMatrix();
+}
+static void readMatrix()
+{
+	Scanner Scanner=new Scanner(System.in);
+	System.out.println("enter number of vertice");
+	n=Scanner.nextInt();
+	System.out.println("enter cost matrix(999for infinity)\n");
+    for(int i=1;i<=n;i++)
+    {
+    	for(int j=1;j<=n;j++)
+    	{
+    		a[i][j]=Scanner.nextInt();
+    	}
+    }
+Scanner.close();
+}
+static void floyds()
+{
+	for(int k=1;k<=n;k++)
+	{
+		for(int i=1;i<=n;i++)
+			for(int j=1;j<=n;j++)
+				if((a[i][k]+a[k][j])<a[i][j])
+					a[i][j]=a[i][k]+a[k][j];
+		
+	}
+}
+
+static void printMatrix()
+{
+	System.out.println("shortest path is");
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			System.out.println(a[i][j]+"\t");
+		}
+	System.out.println("\n");
+}
+}
+
+}

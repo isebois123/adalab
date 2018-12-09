@@ -1,0 +1,80 @@
+import java.util.Scanner;
+public class KruskalsClass
+{
+  final static int max=20;
+  static int n;
+  static int cost[][];
+  static int parent[];
+  static Scanner scan=new Scanner(System.in);
+  public static void main(String args[])
+  {
+	  readmatrix();
+	  kruskals();
+  }
+  static void readmatrix()
+  {
+	  int i,j;
+	  cost=new int [max][max];
+	  parent=new int[max];
+	  System.out.println("implementation of kruskals algorithm");
+	  		System.out.println("enter number of vertice");
+	  		n=scan.nextInt();
+	  		System.out.println("enter cost adjacency matrix");
+	  		for(i=1;i<=n;i++)
+	  		{
+	  			for(j=1;j<=n;j++)
+	  			{
+	  				cost[i][j]=scan.nextInt();
+	  				if(cost[i][j]==0)
+	  					cost[i][j]=999;
+	  				}
+	  			}
+  }
+  static void kruskals()
+  {
+	  int a=0,b=0,u=0,v=0,i,j,ne=1,min,mincost=0;
+	  System.out.println("edges of min cost spanning tree are");
+	  while(ne<n)
+	  {
+		  for(i=1,min=999;i<=n;i++)
+		  {
+			  for(j=1;j<=n;j++)
+			  {
+				  if(cost[i][j]<min)
+				  {
+					  min=cost[i][j];
+					  a=u=i;
+					  b=v=j;
+					  
+				  }
+			  }
+		  }
+		  u=find(u,parent);
+		  v=find(v,parent);
+		  if(uni(u,v,parent)!=0) 
+		  {
+			  uni(u,v, parent);
+			  System.out.println(ne+++"edge("+a+","+b+")="+min);
+			  mincost+=min;
+			  parent[v]=u;
+		  }
+		  cost[a][b]=cost[b][a]=999;
+	  }
+		  System.out.println("minimumcost:"+mincost);
+		  }
+  static int find(int i, int parent[])
+	  {
+	  while(parent[i]!=0)
+		  i=parent[i];
+	  return i;
+	  }
+  static int uni(int i,int j, int parent[])
+  {
+  if(i!=j)
+  {
+	  parent[j]=i;
+	  return 1;
+  }
+  else return 0;
+  }
+}

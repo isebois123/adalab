@@ -1,0 +1,51 @@
+import java.util.Scanner;
+public class SumOfSubset 
+{
+final static int MAX=10;
+static int n,s[],soln[],d;
+public static void main(String args[])
+{
+	s=new int [MAX];
+	soln=new int[MAX];
+	int sum=0;
+	Scanner scanner=new Scanner(System.in);
+	System.out.println("enter numeber of elements:");
+	n=scanner.nextInt();
+	System.out.println("enter the set in increasing order:");
+	for(int i=1;i<=n;i++)
+		s[i]=scanner.nextInt();
+	System.out.println("enter max subset values(d)");
+	d=scanner.nextInt();
+	for(int i=1;i<=n;i++)
+		sum=sum+s[i];
+	if(sum<d||s[1]>d)
+		System.out.println("no subset possible");
+	else
+		Sumofsub(0,0,sum);
+	scanner.close();
+}
+static void Sumofsub(int i,int weight,int total)
+{
+	if(promising(i,weight,total)==true)
+		if(weight==d)
+		{
+			for(int j=1;j<=i;j++)
+			{
+				if(soln[j]==1)
+					System.out.print(s[j]+"");
+			}
+			System.out.println();
+		}
+		else
+		{
+			soln[i+1]=1;
+			Sumofsub(i+1,weight+s[i+1],total-s[i+1]);
+			soln[i+1]=0;
+			Sumofsub(i+1,weight,total-s[i+1]);
+		}
+}
+static boolean promising(int i,int weight,int total)
+{
+	return((weight+total>=d)&&(weight==d||weight+s[i+1]<=d));
+}
+}

@@ -1,0 +1,142 @@
+import java.util.Scanner;
+public class staff 
+{
+protected String staffid,name,phone;
+protected float salary;
+public staff(String staffid,String name,float salary,String phone)
+{
+	this.staffid=staffid;
+	this.name=name;
+	this.salary=salary;
+	this.phone=phone;
+	
+}
+public String toString()
+{
+	return staffid+""+name+""+salary+""+phone;
+}
+}
+class teaching extends staff
+{
+	private String domain;
+	private String publication;
+	teaching(String staffid,String name,float salary,String phone,String domain,String publication){
+	super(staffid,name,salary,phone);
+		this.domain=domain;
+		this.publication=publication;
+		}
+	public String toString()
+	{
+		return staffid+""+name+""+salary+""+phone+""+domain+""+publication;
+	}
+}
+class technical extends staff
+{
+	private String skills;
+	technical(String staffid,String name,float salary,String phone,String skills)
+	{
+		super(staffid,name,salary,phone);
+		this.skills=skills;
+	}
+	public String toString()
+	{
+		return super.toString()+""+skills;
+	}
+}
+class contract extends staff
+{
+	private String period;
+	contract(String staffid,String name,float salary,String phone,String skills)
+	{
+		
+		super(staffid,name,salary,phone);
+		this.period=period;
+	}
+	public String toString()
+	{
+	return super.toString()+""+period;
+}
+public class staffdemo
+{
+	 void main(String[]args)
+	{
+		int i,choice;
+		String staffid,name,phone,domain,publications,skills,period;
+		float salary;
+		int tcount=0,techcount=0,concount=0;
+		teaching t[]=new teaching[5];
+		technical tech[]=new technical[5];
+		contract c[]=new contract[5];
+		Scanner sc=new Scanner(System.in);
+		for(;;)
+		{
+			System.out.println("enter your choice");
+			System.out.println("1.teaching staff entry\n 2.technial staff entry\n 3.contract staff entry\n 4.teaching staff details\n 5.technical staff details\n 6.contract staff details\n 7.exit");
+			choice=sc.nextInt();
+			switch(choice)
+			{
+			case 1: System.out.println("enter teaching staff details(id,name,phone,domain,public_action)");
+			staffid=sc.next();
+			name=sc.next();
+			salary=sc.nextFloat();
+			phone=sc.next();
+			domain=sc.next();
+			publications=sc.next();
+			t[tcount]=new teaching(staffid,name,salary,phone,domain,publications);
+			tcount++;
+			break;
+			
+			case 2:	System.out.println("enter technical staff details(id,name,salary,phone,skills");
+			staffid=sc.next();
+			name=sc.next();
+			salary=sc.nextFloat();
+			phone=sc.next();
+			skills=sc.next();
+			tech[techcount]=new technical(staffid,name,salary,phone,skills);
+			techcount++;
+			break;
+			
+			case 3:System.out.println("enter contract staff details(id,name,salary,phone,period)");
+			staffid=sc.next();
+			name=sc.next();
+			salary=sc.nextFloat();
+			phone=sc.next();
+			period=sc.next();
+			c[concount]=new contract(staffid,name,salary,phone,period);
+			concount++;
+			break;
+			
+			case 4:System.out.println("teaching staff details");
+			if(tcount==0)
+				System.out.println("teaching staff current count is zero\n");
+			else
+			{
+				for(i=0;i<tcount;i++)
+				{
+					System.out.println(t[i]);
+				}
+			}
+			break;
+			
+			case 5: System.out.println("technical staff details");
+			if(techcount==0)
+				System.out.println("technical staff current count is zero\n");
+			else
+			{
+				for(i=0;i<techcount;i++)
+				{
+					System.out.println(tech[i]);
+					
+				}
+			}
+				break;
+				
+			case 6: System.out.println("contract staff details");
+			if(concount==0)
+				System.out.println("contract staff current count is zero\n");
+			
+			}
+		}
+	}
+	}
+}

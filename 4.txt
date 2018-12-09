@@ -1,0 +1,59 @@
+import java.util.*;
+public class quicksort
+{     
+	static final int max=10005;
+    static int[]a=new int[max];
+ public static void main(String[]args)
+ {
+	 int n;
+	 Scanner sc=new Scanner(System.in);
+	 System.out.println("enter array size");
+	  n=sc.nextInt();
+	 Random random=new Random();
+	 System.out.println("elements are");
+	 for(int i=0;i<n;i++)
+		 a[i]=5000+random.nextInt(10000);
+	 for(int i=0;i<n;i++)
+		 System.out.println(a[i]+"\n");
+	 long startTime=System.nanoTime();
+	 quicksortAlgorithm(0,n-1);
+	 long stopTime=System.nanoTime();
+	 long elapsedTime=stopTime-startTime;
+	 System.out.println("\n sorted array");
+	 for(int i=0;i<n;i++)
+	 System.out.println(a[i]+"\n");
+	 System.out.println();
+	 System.out.println("time complexity in ms for n="+n+" is"+(double)elapsedTime/(1000000));
+	  } 
+public static void quicksortAlgorithm(int p,int r)
+{
+	int i,j,temp,pivot;
+	if(p<r)
+	{
+		i=p;
+		j=r+1;
+		pivot=a[p];
+		while(true)
+		{
+		    i++;
+			while(a[i]<pivot&&i<r)
+			i++;
+			j--;
+			while(a[j]>pivot)
+		     j--;
+			if(i<j)
+			{
+				temp=a[i];
+				a[i]=a[j];
+				a[j]=temp;
+			}
+			else
+				break;
+		}
+		a[p]=a[j];
+		a[j]=pivot;
+		quicksortAlgorithm(p,j-1);
+		quicksortAlgorithm(j+1,r);
+	}	
+}
+}

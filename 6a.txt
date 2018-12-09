@@ -1,0 +1,63 @@
+import java.util.Scanner;
+public class KnapsackDP
+{
+static final int max=20;
+static int n,m,w[],p[],v[][],matrix[][];
+public static void main(String args[])
+{
+w=new int [max];
+p=new int [max];
+v=new int [max][max];
+matrix=new int [max][max];
+int optsoln;
+ReadObjects();
+for(int i=0;i<=m;i++)
+	v[0][i]=0;
+for(int i=0;i<=n;i++)
+	v[i][0]=0;
+optsoln=knapsack();
+System.out.println("optimal solution="+optsoln);
+}
+static int knapsack()
+{
+int r;
+for(int i=1;i<=n;i++)
+	for(int j=1;j<=m;j++)
+		if((w[i]<=j)&&(p[i]+v[i-1][j-w[i]]>v[i-1][j]))
+		{
+			v[i][j]=p[i]+v[i-1][j-w[i]];
+			matrix[i][j]=1;
+		}
+		else
+		{
+			v[i][j]=v[i-1][j];
+			matrix[i][j]=0;
+		}
+r=m;
+System.out.println("items=");
+for(int i=n;i>=0;i--)
+	if(matrix[i][r]==1)
+	{
+		System.out.println(i+"");
+        r=r-w[i];
+    }
+System.out.println();
+return v[n][m];
+}
+static void ReadObjects()
+{
+	Scanner Scan=new Scanner(System.in);
+	System.out.println("knapsack problem-dynamic programing solution");
+	System.out.println("enter max capacity of knapsack");
+	m=Scan.nextInt();
+	System.out.println("enter number of objects");
+	n=Scan.nextInt();
+	System.out.println("enter weights");
+	for(int i=1;i<=n;i++)
+		w[i]=Scan.nextInt();
+	System.out.println("enter profits");
+	for(int i=1;i<=n;i++)
+		p[i]=Scan.nextInt();
+	Scan.close();
+}
+}
